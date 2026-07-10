@@ -24,8 +24,6 @@ import QtSensors 5.11
 
 import org.asteroid.sensorlogd 1.0
 
-import "../graphs"
-
 Item {
     id: root
     property int currentHr: 0 //we ought to get the last value from hrdataloader - but it currently doesn't do any caching so operation would be a bit slow, and we run the hr sensor when app starts anyway, so we'll ignore that for now

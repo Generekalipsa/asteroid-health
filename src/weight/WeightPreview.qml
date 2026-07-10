@@ -21,7 +21,6 @@ import org.asteroid.controls 1.0
 
 import org.asteroid.sensorlogd 1.0
 
-import "../graphs"
 MouseArea {
     height: column.implicitHeight
     onClicked: pageStack.push(weightDetailPage)
