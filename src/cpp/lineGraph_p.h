@@ -27,8 +27,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef LINEGRAPH_H
-#define LINEGRAPH_H
+#ifndef LINEGRAPH_P_H
+#define LINEGRAPH_P_H
 
 #include <QQuickPaintedItem>
 #include <QPixmap>
@@ -36,7 +36,7 @@
 #include <QVector>
 #include <QPointF>
 
-class LineGraph : public QQuickPaintedItem
+class LineGraph_p : public QQuickPaintedItem
 {
     Q_OBJECT
 
@@ -50,7 +50,7 @@ class LineGraph : public QQuickPaintedItem
 
 public:
     Q_INVOKABLE void loadGraphData(QVariant fileDataInput);
-    LineGraph();
+    LineGraph_p();
     void paint(QPainter *painter) override;
 
 signals:
@@ -83,4 +83,4 @@ private:
     bool graphRelative;
 };
 
-#endif // LINEGRAPH_H
+#endif // LINEGRAPH_P_H

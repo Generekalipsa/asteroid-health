@@ -22,55 +22,18 @@ import org.asteroid.controls 1.0
 import org.asteroid.health 1.0
 import org.asteroid.sensorlogd 1.0
 
-Item {
+LineGraph {
     id: graph
     property date startTime: new Date()
     property date endTime: new Date()
 
-    onStartTimeChanged: hrGraph.loadGraphData(hrDataLoader.getDataFromTo(startTime,endTime))
-    onEndTimeChanged: hrGraph.loadGraphData(hrDataLoader.getDataFromTo(startTime,endTime))
+    onStartTimeChanged: graph.loadGraphData(hrDataLoader.getDataFromTo(startTime,endTime))
+    onEndTimeChanged: graph.loadGraphData(hrDataLoader.getDataFromTo(startTime,endTime))
 
     Component.onCompleted: {
-        hrGraph.loadGraphData(hrDataLoader.getDataFromTo(startTime,endTime))
+        graph.loadGraphData(hrDataLoader.getDataFromTo(startTime,endTime))
     }
     HrDataLoader { id: hrDataLoader
-        onDataChanged: hrGraph.loadGraphData(getDataFromTo(startTime,endTime))
-    }
-    VerticalLabels { // labels column
-        id: markerParent
-        width: parent.width/8
-        startValue: 0
-        endValue: hrGraph.maxValue
-        anchors {
-            left: parent.left
-            top: hrGraph.top
-            bottom: hrGraph.bottom
-            topMargin: hrGraph.lineWidth/2
-            bottomMargin: anchors.topMargin
-        }
-    }
-    LineGraph {
-        id: hrGraph
-        anchors {
-            left: markerParent.right
-            right: parent.right
-            top: parent.top
-            bottom: labelsRow.top
-        }
-        relativeMode: false
-        lineWidth: 4
-    }
-    TimeLabels {
-        id: labelsRow
-        height: Dims.w(5)
-        startTime: hrGraph.minTime / 1000
-        endTime: hrGraph.maxTime / 1000
-        anchors {
-            bottom: parent.bottom
-            left: hrGraph.left
-            right: hrGraph.right
-            rightMargin: hrGraph.lineWidth/2
-            leftMargin: anchors.rightMargin
-        }
+        onDataChanged: graph.loadGraphData(getDataFromTo(startTime,endTime))
     }
 }

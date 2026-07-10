@@ -13,6 +13,7 @@
         <file>graphs/BarGraph.qml</file>
         <file>graphs/HrGraph.qml</file>
         <file>graphs/StepsLineGraph.qml</file>
+        <file>graphs/LineGraph.qml</file>
         <file>graphs/TimeLabels.qml</file>
         <file>graphs/VerticalLabels.qml</file>
         <file>graphs/WeightGraph.qml</file>

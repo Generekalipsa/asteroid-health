@@ -22,55 +22,18 @@ import org.asteroid.controls 1.0
 import org.asteroid.health 1.0
 import org.asteroid.sensorlogd 1.0
 
-Item {
+LineGraph {
     id: graph
     property date startTime: new Date()
     property date endTime: new Date()
 
-    onStartTimeChanged: stepsGraph.loadGraphData(stepsDataLoader.getDataFromTo(startTime,endTime))
-    onEndTimeChanged: stepsGraph.loadGraphData(stepsDataLoader.getDataFromTo(startTime,endTime))
+    onStartTimeChanged: graph.loadGraphData(stepsDataLoader.getDataFromTo(startTime,endTime))
+    onEndTimeChanged: graph.loadGraphData(stepsDataLoader.getDataFromTo(startTime,endTime))
 
     Component.onCompleted: {
-        stepsGraph.loadGraphData(stepsDataLoader.getDataFromTo(startTime,endTime))
+        graph.loadGraphData(stepsDataLoader.getDataFromTo(startTime,endTime))
     }
     StepsDataLoader { id: stepsDataLoader
-        onDataChanged: stepsGraph.loadGraphData(getDataFromTo(startTime,endTime))
-    }
-    VerticalLabels { // labels column
-        id: markerParent
-        width: parent.width/8
-        startValue: 0
-        endValue: stepsGraph.maxValue
-        anchors {
-            left: parent.left
-            top: stepsGraph.top
-            bottom: stepsGraph.bottom
-            topMargin: stepsGraph.lineWidth/2
-            bottomMargin: anchors.topMargin
-        }
-    }
-    LineGraph {
-        id: stepsGraph
-        anchors {
-            left: markerParent.right
-            right: parent.right
-            top: parent.top
-            bottom: labelsRow.top
-        }
-        relativeMode: false
-        lineWidth: 4
-    }
-    TimeLabels {
-        id: labelsRow
-        height: Dims.w(5)
-        startTime: stepsGraph.minTime / 1000
-        endTime: stepsGraph.maxTime / 1000
-        anchors {
-            bottom: parent.bottom
-            left: stepsGraph.left
-            right: stepsGraph.right
-            rightMargin: stepsGraph.lineWidth/2
-            leftMargin: anchors.rightMargin
-        }
+        onDataChanged: graph.loadGraphData(getDataFromTo(startTime,endTime))
     }
 }
