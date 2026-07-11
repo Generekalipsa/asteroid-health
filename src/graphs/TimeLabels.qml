@@ -156,11 +156,24 @@ Item {
     }
     Repeater {
         model: ListModel { id: listModel }
-        delegate: Label {
-            text: model.value
-            font.pixelSize: Dims.w(5)
+        delegate: Item {
+            anchors.top: parent.top
             x: model.x*root.width - width/2
-            verticalAlignment: Text.AlignVCenter
+            Rectangle {
+                id: pip
+                color: "white"
+                width: 1
+                height: 3
+                radius: width/2
+                anchors.top: parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+            Label {
+                text: model.value
+                font.pixelSize: Dims.w(5)
+                anchors.top: pip.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
         }
     }
 }

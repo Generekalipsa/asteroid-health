@@ -1,8 +1,8 @@
 add_library(
 	asteroid-health
 	main.cpp
-	cpp/lineGraph.cpp
-	cpp/lineGraph.h
+	cpp/lineGraph_p.cpp
+	cpp/lineGraph_p.h
 	resources.qrc
 )
 set_target_properties(asteroid-health PROPERTIES PREFIX "")

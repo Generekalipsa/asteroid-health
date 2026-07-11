@@ -67,13 +67,26 @@ Item {
     }
     Repeater {
         id: labelsRepeater
-        delegate: Label {
+        delegate: Item {
             anchors.right: parent.right
             property real value: root.startValueDivision + root.valueDivisionsInterval*index
-            text: value > 1000 ? value/1000 + "k" : value
-            font.pixelSize: Dims.w(5)
             y: parent.height - (parent.height)*(value/root.valuesDelta) - height/2
-            verticalAlignment: Text.AlignVCenter
+            Rectangle {
+                id: pip
+                color: "white"
+                height: 1
+                width: 3
+                radius: height/2
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+            }
+            Label {
+                anchors.right: pip.left
+                anchors.verticalCenter: parent.verticalCenter
+                text: value > 1000 ? value/1000 + "k" : value
+                font.pixelSize: Dims.w(5)
+                verticalAlignment: Text.AlignVCenter
+            }
         }
     }
 }

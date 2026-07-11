@@ -28,7 +28,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "lineGraph.h"
+#include "lineGraph_p.h"
 
 #include <QPainter>
 #include <QDate>
@@ -38,14 +38,14 @@
 #include <QStandardPaths>
 #include <QPointF>
 
-LineGraph::LineGraph()
+LineGraph_p::LineGraph_p()
 {
     setFlag(ItemHasContents, true);
     setAntialiasing(true);
     setRenderTarget(QQuickPaintedItem::FramebufferObject);
 }
 
-void LineGraph::paint(QPainter *painter)
+void LineGraph_p::paint(QPainter *painter)
 {
     if (m_filedata.count() < 2) {
         qDebug() << "not rendering, not enough data";
@@ -75,7 +75,7 @@ void LineGraph::paint(QPainter *painter)
     painter->drawPolyline(points,j);
 }
 
-void LineGraph::loadGraphData(QVariant fileDataInput) {
+void LineGraph_p::loadGraphData(QVariant fileDataInput) {
     qDebug() << "loadGraphData called";
     QList<QVariant> fileDataAsList = fileDataInput.toList();
     if (fileDataAsList.count() < 1) {
@@ -97,44 +97,44 @@ void LineGraph::loadGraphData(QVariant fileDataInput) {
     update();
 }
 
-void LineGraph::setLineColor(QColor color) {
+void LineGraph_p::setLineColor(QColor color) {
     m_color = color;
     update();
 }
 
-QColor LineGraph::lineColor() {
+QColor LineGraph_p::lineColor() {
     return m_color;
 }
 
-void LineGraph::setLineWidth(float width) {
+void LineGraph_p::setLineWidth(float width) {
     m_lineWidth = width;
     update();
 }
 
-float LineGraph::lineWidth() {
+float LineGraph_p::lineWidth() {
     return m_lineWidth;
 }
 
-int LineGraph::getMaxValue() {
+int LineGraph_p::getMaxValue() {
     return maxValue;
 }
 
-int LineGraph::getMinValue() {
+int LineGraph_p::getMinValue() {
     return minValue;
 }
 
-QDateTime LineGraph::getMaxTime() {
+QDateTime LineGraph_p::getMaxTime() {
     return QDateTime::fromSecsSinceEpoch(maxTime);
 }
 
-QDateTime LineGraph::getMinTime() {
+QDateTime LineGraph_p::getMinTime() {
     return QDateTime::fromSecsSinceEpoch(minTime);
 }
 
-bool LineGraph::relative() {
+bool LineGraph_p::relative() {
     return graphRelative;
 }
 
-void LineGraph::setRelative(bool newRelative) {
+void LineGraph_p::setRelative(bool newRelative) {
     graphRelative = newRelative;
 }

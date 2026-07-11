@@ -24,32 +24,25 @@ import org.asteroid.sensorlogd 1.0
 
 Item {
     id: graph
-    property date startTime: new Date()
-    property date endTime: new Date()
-
-    onStartTimeChanged: weightGraph.loadGraphData(weightDataLoader.getDataFromTo(startTime,endTime))
-    onEndTimeChanged: weightGraph.loadGraphData(weightDataLoader.getDataFromTo(startTime,endTime))
-
-    Component.onCompleted: {
-        weightGraph.loadGraphData(weightDataLoader.getDataFromTo(startTime,endTime))
+    function loadGraphData(data) {
+        lineGraph_p.loadGraphData(data)
     }
-    WeightDataLoader { id: weightDataLoader
-    }
+
     VerticalLabels { // labels column
         id: markerParent
         width: parent.width/8
         startValue: 0
-        endValue: weightGraph.maxValue
+        endValue: lineGraph_p.maxValue
         anchors {
             left: parent.left
-            top: weightGraph.top
-            bottom: weightGraph.bottom
-            topMargin: weightGraph.lineWidth/2
+            top: lineGraph_p.top
+            bottom: lineGraph_p.bottom
+            topMargin: lineGraph_p.lineWidth/2
             bottomMargin: anchors.topMargin
         }
     }
-    LineGraph {
-        id: weightGraph
+    LineGraph_p {
+        id: lineGraph_p
         anchors {
             left: markerParent.right
             right: parent.right
@@ -62,13 +55,13 @@ Item {
     TimeLabels {
         id: labelsRow
         height: Dims.w(5)
-        startTime: weightGraph.minTime / 1000
-        endTime: weightGraph.maxTime / 1000
+        startTime: lineGraph_p.minTime / 1000
+        endTime: lineGraph_p.maxTime / 1000
         anchors {
             bottom: parent.bottom
-            left: weightGraph.left
-            right: weightGraph.right
-            rightMargin: weightGraph.lineWidth/2
+            left: lineGraph_p.left
+            right: lineGraph_p.right
+            rightMargin: lineGraph_p.lineWidth/2
             leftMargin: anchors.rightMargin
         }
     }
